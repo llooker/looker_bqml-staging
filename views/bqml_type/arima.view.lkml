@@ -170,11 +170,111 @@ view: arima_forecast {
 
   extends: [forecast_base]
 
-  sql_table_name: ML.FORECAST(MODEL @{bqml_model_dataset_name}.{% parameter arima.model_name %}
-                            , STRUCT({% parameter arima.set_horizon %} AS horizon
-                            , {% parameter arima.set_confidence_level %} AS confidence_level)) ;;
+  # sql_table_name: ML.FORECAST(MODEL @{bqml_model_dataset_name}.{% parameter arima.model_name %}
+  #                           , STRUCT({% parameter arima.set_horizon %} AS horizon
+  #                           , {% parameter arima.set_confidence_level %} AS confidence_level)) ;;
 
+  derived_table: {
+    sql: with
+        -- get model forecast:
+        forecast_values as (
+          select forecast_timestamp
+              ,  forecast_value
+              ,  standard_error
+              ,  confidence_level
+              ,  prediction_interval_lower_bound
+              ,  prediction_interval_upper_bound
+          from ML.FORECAST(MODEL @{bqml_model_dataset_name}.{% parameter arima.model_name %}
+                         , STRUCT({% parameter arima.set_horizon %} AS horizon
+                         , {% parameter arima.set_confidence_level %} AS confidence_level)
+                        )
+        ),
+        -- generate date series
+        -- uses input_data for min_date and forecast_values for max date
+        date_series as (
+        select date from unnest(GENERATE_DATE_ARRAY(
+            (select min({% parameter arima.time_series_timestamp_col %}) min_date from @{bqml_model_dataset_name}.{% parameter arima.model_name %}_input_data),
+            (select max(date(forecast_timestamp)) max_date from forecast_values),
+            INTERVAL 1 DAY)) date
+        )
+
+        select d.date
+             , i.{% parameter arima.time_series_data_col %} as time_series_data_col
+             , i.{% parameter arima.time_series_timestamp_col %} as time_series_timestamp_col
+             , f.*
+        from date_series d
+        left join @{bqml_model_dataset_name}.{% parameter arima.model_name %}_input_data i
+            on i.{% parameter arima.time_series_timestamp_col %} = d.date
+        left join forecast_values f
+            on date(f.forecast_timestamp) = d.date
+
+    ;;
   }
+
+  dimension: pk {
+    type: string
+    sql: TIMESTAMP(${TABLE}.date) ;;
+    primary_key: yes
+  }
+
+  dimension_group: date {
+    label: ""
+    type: time
+    sql: TIMESTAMP(${TABLE}.date) ;;
+  }
+
+  dimension: time_series_data_col {
+    label_from_parameter: arima.time_series_data_col
+    sql: ${TABLE}.time_series_data_col ;;
+  }
+
+  dimension: forecasted_time_series_data_col {
+    label: "Forecasted Value"
+    sql: ${TABLE}.forecast_value ;;
+  }
+
+  dimension: standard_error {
+    type: string
+    sql: ${TABLE}.standard_error ;;
+  }
+
+  dimension: confidence_level {
+    type: string
+    sql: ${TABLE}.confidence_level ;;
+  }
+
+  dimension: prediction_interval_lower_bound {
+    type: string
+    sql: ${TABLE}.prediction_interval_lower_bound ;;
+  }
+
+  dimension: prediction_interval_upper_bound {
+    type: string
+    sql: ${TABLE}.prediction_interval_upper_bound ;;
+  }
+
+  measure: total_time_series_data_col {
+    type: sum
+    sql: ${time_series_data_col} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: total_forecast {
+    type: sum
+    sql: ${forecasted_time_series_data_col} ;;
+    value_format_name: decimal_2
+  }
+  measure: total_prediction_interval_lower_bound {
+    type: sum
+    sql: ${prediction_interval_lower_bound} ;;
+    value_format_name: decimal_4
+  }
+  measure: total_prediction_interval_upper_bound {
+    type: sum
+    sql: ${prediction_interval_upper_bound} ;;
+    value_format_name: decimal_4
+  }
+}
   view: arima_explain_forecast {
     label: "Explain Forecast"
 

@@ -15,4 +15,9 @@ view: model_info {
     type: string
     sql: ${TABLE}.created_by_email ;;
   }
+
+  dimension: shared_with_emails {
+    type: string
+    sql: ${TABLE}.shared_with_emails ;;
+  }
 }

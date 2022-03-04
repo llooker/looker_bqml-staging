@@ -26,14 +26,14 @@ constant: CONNECTION_NAME {
 
 constant: bqml_model_dataset_name {
   # value: "{{_user_attributes['bqml_model_dataset_name']}}"
-  # value: "looker_scratch"
-  value: "bqmlextensiontests"
+  value: "looker_scratch"
+  # value: "bqmlextensiontests"
   export: override_optional
 }
 
 constant: GCP_PROJECT {
   # value: "{{_user_attributes['gcp_project']}}"
-  # value: "sunlit-descent-196820"
-  value: "four-mile-sandbox-v2"
+  value: "sunlit-descent-196820"
+  # value: "four-mile-sandbox-v2"
   export: override_optional
 }

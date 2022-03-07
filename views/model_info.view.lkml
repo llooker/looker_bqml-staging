@@ -20,4 +20,9 @@ view: model_info {
     type: string
     sql: ${TABLE}.shared_with_emails ;;
   }
+
+  dimension: full_email_list {
+    type: string
+    sql: ${created_by_email}||${shared_with_emails} ;;
+  }
 }

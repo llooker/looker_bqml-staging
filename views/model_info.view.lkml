@@ -23,6 +23,6 @@ view: model_info {
 
   dimension: full_email_list {
     type: string
-    sql: ${created_by_email}||${shared_with_emails} ;;
+    sql: ${created_by_email}||IFNULL(${shared_with_emails},'') ;;
   }
 }

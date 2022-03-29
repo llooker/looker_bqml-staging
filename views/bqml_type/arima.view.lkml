@@ -24,6 +24,7 @@ view: arima {
     default_value: "" ## { string_value | string_array }
   }
   parameter: horizon {
+    hidden: yes
     type: unquoted
     default_value: "1000" ## int64_value
   }

@@ -1,6 +1,11 @@
 view: model_info {
   sql_table_name: `@{GCP_PROJECT}`.@{bqml_model_dataset_name}.bqml_model_info ;;
 
+  dimension: model_guid {
+    type: string
+    sql: ${TABLE}.model_guid ;;
+  }
+
   dimension: model_name {
     type: string
     sql: ${TABLE}.model_name ;;

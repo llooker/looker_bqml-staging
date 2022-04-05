@@ -200,8 +200,8 @@ view: arima_forecast {
         )
 
       select d.date
-      , i.{% parameter arima.time_series_data_col %} as {% parameter arima.time_series_data_col %}
-      , i.{% parameter arima.time_series_timestamp_col %} as {% parameter arima.time_series_timestamp_col %}
+      , i.{% parameter arima.time_series_data_col %} as time_series_data_col
+      , i.{% parameter arima.time_series_timestamp_col %} as time_series_timestamp_col
       , f.*
       from date_series d
       left join @{bqml_model_dataset_name}.{% parameter arima.input_table_name %} i

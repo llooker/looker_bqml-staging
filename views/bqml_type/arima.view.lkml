@@ -204,7 +204,7 @@ view: arima_forecast {
       , i.{% parameter arima.time_series_timestamp_col %} as time_series_timestamp_col
       , f.*
       from date_series d
-      left join @{bqml_model_dataset_name}.{% parameter arima.model_name %}_input_data i
+      left join @{bqml_model_dataset_name}.{% parameter arima.input_table_name %} i
       on i.{% parameter arima.time_series_timestamp_col %} = d.date
       left join forecast_values f
       on date(f.forecast_timestamp) = d.date

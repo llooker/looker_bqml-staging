@@ -31,14 +31,14 @@ view: model_info {
     sql: "\""||${created_by_email}||"\" "||IFNULL(${shared_with_emails},'') ;;
   }
 
-  dimension: created_at {
+  dimension: model_created_at {
     type: date_time
-    sql: ${TABLE}.created_at ;;
+    sql: TIMESTAMP_MICROS(${TABLE}.model_created_at) ;;
   }
 
-  dimension: updated_at {
+  dimension: model_updated_at {
     type: date_time
-    sql: ${TABLE}.updated_at ;;
+    sql: TIMESTAMP_MICROS(${TABLE}.model_updated_at) ;;
   }
 
 }

@@ -33,12 +33,12 @@ view: model_info {
 
   dimension: model_created_at {
     type: date_time
-    sql: TIMESTAMP_MICROS(${TABLE}.model_created_at) ;;
+    sql: TIMESTAMP_MILLIS(${TABLE}.model_created_at) ;;
   }
 
   dimension: model_updated_at {
     type: date_time
-    sql: TIMESTAMP_MICROS(${TABLE}.model_updated_at) ;;
+    sql: TIMESTAMP_MILLIS(${TABLE}.model_updated_at) ;;
   }
 
 }

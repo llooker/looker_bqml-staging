@@ -36,9 +36,9 @@ view: model_info {
     sql: ${TABLE}.created_at ;;
   }
 
-  # dimension: updated_at {
-  #   type: date_time
-  #   sql: ${TABLE}.updated_at ;;
-  # }
+  dimension: updated_at {
+    type: date_time
+    sql: ${TABLE}.updated_at ;;
+  }
 
 }

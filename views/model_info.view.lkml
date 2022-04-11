@@ -30,4 +30,15 @@ view: model_info {
     type: string
     sql: "\""||${created_by_email}||"\" "||IFNULL(${shared_with_emails},'') ;;
   }
+
+  dimension: created_at {
+    type: date_time
+    sql: ${TABLE}.created_at ;;
+  }
+
+  # dimension: updated_at {
+  #   type: date_time
+  #   sql: ${TABLE}.updated_at ;;
+  # }
+
 }

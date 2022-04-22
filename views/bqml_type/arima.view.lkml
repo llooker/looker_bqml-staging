@@ -208,7 +208,6 @@ view: arima_forecast {
       on i.{% parameter arima.time_series_timestamp_col %} = d.date
       left join forecast_values f
       on date(f.forecast_timestamp) = d.date
-
       ;;
   }
 
@@ -255,14 +254,14 @@ view: arima_forecast {
   }
 
   measure: total_time_series_data_col {
-    type: sum
-    sql: ${time_series_data_col} ;;
+    type: number
+    sql: sum(${time_series_data_col}) ;;
     value_format_name: decimal_2
   }
 
   measure: total_forecast {
-    type: sum
-    sql: ${forecasted_time_series_data_col} ;;
+    type: number
+    sql: sum(${forecasted_time_series_data_col}) ;;
     value_format_name: decimal_2
   }
   measure: total_prediction_interval_lower_bound {

@@ -2,8 +2,8 @@ project_name: "looker_bqml-staging"
 
 application: looker-bqml-staging {
   label: "looker-bqml (staging)"
-  url: "https://looker-bqml-staging.herokuapp.com/bundle.js"
-  # file: "bundle.js
+  # url: "https://looker-bqml-staging.herokuapp.com/bundle.js"
+  file: "bundle.js
   entitlements: {
     core_api_methods: ["all_lookml_models", "create_query", "run_query", "lookml_model_explore", "model_fieldname_suggestions", "me", "create_embed_url_as_me"]
     use_form_submit:  yes

@@ -5,7 +5,7 @@ application: looker-bqml-staging {
   # url: "https://looker-bqml-staging.herokuapp.com/bundle.js"
   file: "bundle.js"
   entitlements: {
-    core_api_methods: ["all_lookml_models", "create_query", "run_query", "lookml_model_explore", "model_fieldname_suggestions", "me", "all_user_attributes", "user_attribute_user_values"]
+    core_api_methods: ["all_lookml_models", "create_query", "run_query", "lookml_model_explore", "model_fieldname_suggestions", "me", "user_attribute_user_values"]
     use_form_submit:  yes
     scoped_user_attributes: [
       "bigquery_connection_name",

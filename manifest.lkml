@@ -7,6 +7,8 @@ application: looker-bqml-staging {
   entitlements: {
     core_api_methods: ["all_lookml_models", "create_query", "run_query", "lookml_model_explore", "model_fieldname_suggestions", "me", "user_attribute_user_values"]
     use_form_submit:  yes
+    use_embeds: yes
+    use_iframes:  yes
     scoped_user_attributes: [
       "bigquery_connection_name",
       "google_client_id",

@@ -21,16 +21,15 @@ application: looker-bqml-staging {
 }
 
 constant: CONNECTION_NAME {
-  value: "{{_user_attributes['bigquery_connection_name']}}"
-  #value: "4mile_bigquery"
+  # value: "connection"
+  value: "4mile_bigquery"
+  export: override_required
 }
 
 constant: bqml_model_dataset_name {
   value: "{{_user_attributes['bqml_model_dataset_name']}}"
-  #value: "looker_scratch"
 }
 
 constant: GCP_PROJECT {
   value: "{{_user_attributes['gcp_project']}}"
-  #value: "sunlit-descent-196820"
 }

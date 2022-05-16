@@ -19,21 +19,16 @@ application: looker-bqml-staging {
 }
 
 constant: CONNECTION_NAME {
-  # value: "{{_user_attributes['bigquery_connection_name']}}"
-  value: "4mile_bigquery_davidb"
+  value: "{{_user_attributes['bigquery_connection_name']}}"
   export: override_optional
 }
 
 constant: bqml_model_dataset_name {
-  # value: "{{_user_attributes['bqml_model_dataset_name']}}"
-  value: "looker_scratch"
-  # value: "bqmlextensiontests"
+  value: "{{_user_attributes['bqml_model_dataset_name']}}"
   export: override_optional
 }
 
 constant: GCP_PROJECT {
-  # value: "{{_user_attributes['gcp_project']}}"
-  value: "sunlit-descent-196820"
-  # value: "four-mile-sandbox-v2"
+  value: "{{_user_attributes['gcp_project']}}"
   export: override_optional
 }

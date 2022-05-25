@@ -21,8 +21,8 @@ application: looker-bqml-staging {
 }
 
 constant: CONNECTION_NAME {
-  # value: "connection"
-  value: "4mile_bigquery"
+  value: "bigquery_ml_oauth"
+  # value: "4mile_bigquery"
   export: override_required
 }
 

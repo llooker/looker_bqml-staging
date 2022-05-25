@@ -1,7 +1,7 @@
 project_name: "looker_bqml-staging"
 
 application: looker-bqml-staging {
-  label: "looker-bqml (staging)"
+  label: "BQML Accelerator"
   # url: "https://looker-bqml-staging.herokuapp.com/bundle.js"
   file: "bundle.js"
   entitlements: {

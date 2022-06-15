@@ -13,9 +13,12 @@ application: home {
       "bigquery_connection_name",
       "google_client_id",
       "bqml_model_dataset_name",
-      "gcp_project"
+      "gcp_project",
+      "looker_client_id",
+      "looker_client_secret",
+      "access_token_server_endpoint"
     ]
-    external_api_urls: ["https://bigquery.googleapis.com"]
+    external_api_urls: ["https://bigquery.googleapis.com","https://looker-machine-learning.wl.r.appspot.com/access_token"]
     oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth"]
   }
 }
